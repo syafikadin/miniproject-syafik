@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 import ListCars from '../views/admin/ListCars.vue'
+import index from '../views/index.vue'
+import Dashboard from '../views/admin/Dashboard.vue'
+import DetailMobil from '../views/DetailMobil'
 
 Vue.use(VueRouter)
 
@@ -9,17 +11,27 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: index
   },
   {
     path: '/about',
     name: 'about',
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    component: () => import('../views/AboutView.vue')
   },
   {
     path: '/admin/listCars',
     name: 'listcars',
     component: ListCars
+  },
+  {
+    path: '/admin/',
+    name: 'dashboard',
+    component: Dashboard
+  },
+  {
+    path: '/detailMobil/:id',
+    name: 'detailMobil',
+    component: DetailMobil
   },
 ]
 
