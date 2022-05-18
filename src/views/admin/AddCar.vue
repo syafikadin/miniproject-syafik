@@ -3,7 +3,7 @@
     <v-row>
         <v-col>
             <v-btn
-            to="/listCars"
+            to="/admin/listCars"
             class="mb-4"
             >
                 Kembali
