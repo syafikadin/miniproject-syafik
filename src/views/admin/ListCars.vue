@@ -9,7 +9,7 @@
       <v-col>
         <v-btn 
         class="mt-4"
-        to="/tambahMobil"
+        to="/admin/addCar"
         >
             Tambah Mobil
           <v-icon> mdi-plus-circle-outline</v-icon>

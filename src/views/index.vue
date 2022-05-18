@@ -1,7 +1,7 @@
 <template>
 <v-container>
     <v-row>
-        <h1 class="mx-auto">Selamat Datang di Syafik's Showroom</h1>
+        <h1 class="mx-auto mt-5 mb-10">Selamat Datang di Syafik's Showroom</h1>
     </v-row>
     <v-row>
         <v-col v-for="(item, index) in mobil" :key="item.id_mobil">

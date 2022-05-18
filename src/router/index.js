@@ -9,6 +9,7 @@ import ConfirmPayment from '../views/ConfirmPayment'
 import tespage from '../views/tespage'
 import InTransaction from '../views/admin/InTransaction'
 import TransactionHistory from '../views/admin/TransactionHistory'
+import AddCar from '../views/admin/AddCar'
 
 Vue.use(VueRouter)
 
@@ -57,6 +58,11 @@ const routes = [
     path: '/admin/transactionHistory',
     name: 'transactionhistory',
     component: TransactionHistory
+  },
+  {
+    path: '/admin/addCar',
+    name: 'addcar',
+    component: AddCar
   },
 ]
 

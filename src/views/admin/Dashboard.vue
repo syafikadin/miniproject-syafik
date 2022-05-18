@@ -5,13 +5,6 @@
             <div class="mx-auto mt-5">
                 <h1>Dashboard Syafik's Showroom</h1>
             </div>
-            <v-carousel hide-delimiters class="mt-10">
-                <v-carousel-item
-                v-for="(item,i) in mobil"
-                :key="i"
-                :src="item.gambar"
-                ></v-carousel-item>
-            </v-carousel>
         </v-row>
     </v-container>
 </template>
