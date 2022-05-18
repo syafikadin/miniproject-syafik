@@ -8,6 +8,7 @@ import FormTransaksi from '../views/FormTransaksi'
 import ConfirmPayment from '../views/ConfirmPayment'
 import tespage from '../views/tespage'
 import InTransaction from '../views/admin/InTransaction'
+import TransactionHistory from '../views/admin/TransactionHistory'
 
 Vue.use(VueRouter)
 
@@ -51,6 +52,11 @@ const routes = [
     path: '/admin/inTransaction',
     name: 'intransaction',
     component: InTransaction
+  },
+  {
+    path: '/admin/transactionHistory',
+    name: 'transactionhistory',
+    component: TransactionHistory
   },
 ]
 

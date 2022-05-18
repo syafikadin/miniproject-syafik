@@ -26,42 +26,35 @@
                 <th class="text-center">
                   Nama Mobil yang dibeli
                 </th>
-                <th class="text-center">
-                  Laba
+                <th class="text-center" colspan="2">
+                    Actions
                 </th>
-                <th>Actions</th>
               </tr>
             </thead>
 
             <tbody class="text-center">
               <tr v-if="$apollo.loading">Loading ...</tr>
               <tr
-                v-for="item in transaksi" :key="item.id_transaksi">
-                <td>{{ item.id_transaksi }}</td>
+                v-for="item in riwayat_transaksi" :key="item.id_riwayat_transaksi">
+                <td>{{ item.id_riwayat_transaksi }}</td>
                 <td>{{ item.nama_pembeli }}</td>
                 <td>{{ item.alamat_pembeli }}</td>
-                <td>{{ item.status_pembayaran ? 'Sudah Dibayar' : 'Belum Dibayar' }}</td>
                 <td>{{ item.id_mobil }}</td>
                 <td>{{ mobil[item.id_mobil].nama_mobil }}</td>
+                <td>{{ mobil[item.id_mobil].harga_jual }}</td>
+
                 <td>
-
                   <v-btn
-                  color="green"
-                  small
-                  @click="confirmTransaction()"
-                  >
-                    Terima
-                  </v-btn>
-
-                  <v-btn
+                  class="text-left"
+                  block
                   small
                   @click="deleteTransaction(item.id_transaksi)"
                   color="red"
                   >
                     Tolak
                   </v-btn>
-                  
                 </td>
+
               </tr>
             </tbody>
 
@@ -90,7 +83,7 @@ export default {
 
   apollo: {
 
-    transaksi: {
+    riwayat_transaksi: {
       query(){
         return gql`
             query MyQuery {
@@ -98,7 +91,6 @@ export default {
                     alamat_pembeli
                     id_mobil
                     id_riwayat_transaksi
-                    laba
                     nama_mobil
                     nama_pembeli
                 }
@@ -124,6 +116,7 @@ export default {
   methods: {
     confirmTransaction(){
       confirm('Apakah Anda Akan Menerima Transaksi ini?')
+      
     },
 
     deleteTransaction(inputIdTransaction){

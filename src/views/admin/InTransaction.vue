@@ -29,7 +29,9 @@
                 <th class="text-center">
                   Nama Mobil yang dibeli
                 </th>
-                <th>Actions</th>
+                <th class="text-center">
+                  Actions
+                </th>
               </tr>
             </thead>
 
@@ -44,11 +46,10 @@
                 <td>{{ item.id_mobil }}</td>
                 <td>{{ mobil[item.id_mobil].nama_mobil }}</td>
                 <td>
-
                   <v-btn
                   color="green"
                   small
-                  @click="confirmTransaction()"
+                  @click="confirmTransaction(item.id_mobil)"
                   >
                     Terima
                   </v-btn>
@@ -121,8 +122,23 @@ export default {
   },
 
   methods: {
-    confirmTransaction(){
+    confirmTransaction(inputId){
       confirm('Apakah Anda Akan Menerima Transaksi ini?')
+      this.$apollo.mutate({
+          mutation: gql`
+            mutation MyMutation($status: Boolean, $_eq: Int) {
+              update_mobil(where: {id_mobil: {_eq: $_eq}}, _set: {status: $status}) {
+                returning {
+                  id_mobil
+                }
+              }
+            }
+          `,
+          variables: {
+              status: true,
+              _eq: inputId
+          }
+      })
     },
 
     deleteTransaction(inputIdTransaction){

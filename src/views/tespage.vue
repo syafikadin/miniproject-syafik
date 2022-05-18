@@ -14,6 +14,7 @@
 
 <script>
 export default {
+    name: 'tesPage',
     computed: {
         indexNumber() {
             return this.$store.state.indexNumber

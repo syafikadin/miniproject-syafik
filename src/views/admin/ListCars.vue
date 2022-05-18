@@ -67,7 +67,7 @@
                     v-if="!isEditMode"
                     medium
                     class="mr-2"
-                    @click="setEditMode(item.id_mobil, item.nama_mobil, item.warna, item.harga_beli, item.harga_jual, item.tahun, item.bahan_bakar, item.status)"
+                    @click="setEditMode(item.id_mobil, item.gambar, item.nama_mobil, item.warna, item.harga_beli, item.harga_jual, item.tahun, item.bahan_bakar, item.status)"
                   >
                     mdi-pencil
                   </v-icon>
@@ -76,7 +76,7 @@
                     v-else
                     medium
                     class="mr-2"
-                    @click="unsetEditMode()"
+                    @click="unsetEditMode(id_mobil)"
                   >
                     mdi-check
                   </v-icon>
@@ -94,7 +94,7 @@
           </template>
         </v-simple-table>
 
-        <v-simple-table dark class="mt-6" v-else>
+        <v-simple-table class="mt-6" v-else>
           <template v-slot:default>
             <thead>
               <tr>
@@ -135,7 +135,7 @@
               <tr v-if="$apollo.loading">Loading ...</tr>
               <tr>
                 <td>{{ idMobil }}</td>
-                <td><img src="https://ik.imagekit.io/syafik/avanza001_IN2eg9dOD.png?ik-sdk-version=javascript-1.4.3&updatedAt=1652517915660" alt=""></td>
+                <td><img :src="editGambar" alt=""></td>
                 <td><v-text-field v-model="editName" label="Nama Mobil"></v-text-field></td>
                 <td><v-text-field v-model="editColor" label="Warna Mobil"></v-text-field></td>
                 <td><v-text-field v-model="editPurchasePrice" label="Harga Beli"></v-text-field></td>
@@ -181,6 +181,7 @@ export default {
   data() {
     return {
       idMobil: '',
+      editGambar: '',
       isEditMode: false,
       editName: '',
       editColor: '',
@@ -217,8 +218,9 @@ export default {
   },
 
   methods: {
-    setEditMode(id, name, color, purchasePrice, sellPrice, year, fuel, status){
+    setEditMode(id, gambar, name, color, purchasePrice, sellPrice, year, fuel, status){
       this.isEditMode = true
+      this.editGambar = gambar
       this.idMobil = id
       this.editName = name
       this.editColor = color
@@ -230,6 +232,35 @@ export default {
     },
 
     unsetEditMode(){
+      this.$apollo.mutate({
+          mutation: gql`
+            mutation MyMutation($bahan_bakar: String, $harga_beli: String, $harga_jual: String, $nama_mobil: String, $status: Boolean, $tahun: Int, $warna: String, $_eq: Int) {
+              update_mobil(where: {id_mobil: {_eq: $_eq}}, _set: {bahan_bakar: $bahan_bakar, harga_beli: $harga_beli, harga_jual: $harga_jual, nama_mobil: $nama_mobil, status: $status, tahun: $tahun, warna: $warna}) {
+                returning {
+                  bahan_bakar
+                  gambar
+                  harga_beli
+                  harga_jual
+                  id_mobil
+                  nama_mobil
+                  status
+                  tahun
+                  warna
+                }
+              }
+            }
+          `,
+          variables: {
+              bahan_bakar: this.editFuel,
+              harga_beli: this.editPurchasePrice,
+              harga_jual: this.editSellPrice,
+              nama_mobil: this.editName,
+              status: this.editStatus,
+              tahun: this.editYear,
+              warna: this.editColor,
+              _eq: this.idMobil
+          }
+      })
       this.isEditMode = false
     },
 
