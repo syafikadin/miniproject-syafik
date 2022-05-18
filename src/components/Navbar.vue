@@ -1,10 +1,9 @@
 <template>
   <v-app-bar
       app
-      dark
     >
-      <div class="d-flex align-center">
-        Showroom
+      <div class="d-flex align-center ml-5">
+        Syafik Showroom
       </div>
 
       <v-spacer></v-spacer>

@@ -51,7 +51,7 @@
                   @click="deleteTransaction(item.id_transaksi)"
                   color="red"
                   >
-                    Tolak
+                    Hapus Riwayat
                   </v-btn>
                 </td>
 
@@ -114,10 +114,6 @@ export default {
   },
 
   methods: {
-    confirmTransaction(){
-      confirm('Apakah Anda Akan Menerima Transaksi ini?')
-      
-    },
 
     deleteTransaction(inputIdTransaction){
       confirm('Apakah Anda Akan Menolak Transaksi Ini?')
