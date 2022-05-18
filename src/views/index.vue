@@ -47,6 +47,8 @@
 
             <v-card-actions>
                 <v-btn
+                color="primary"
+                @click="changeNumber(index)"
                 v-if="item.status === false"
                 block
                 :to="'/detailMobil/' + index"
@@ -68,11 +70,6 @@ export default {
     data() {
         return {
 
-        }
-    },
-    computed: {
-        indexNumber() {
-            return this.$store.state.indexNumber
         }
     },
 
@@ -97,6 +94,11 @@ export default {
         }
         }
     },
+    methods: {
+        changeNumber(payload) {
+            this.$store.dispatch('changeIndexNumber', payload)
+        }
+    }
 }
 </script>
 

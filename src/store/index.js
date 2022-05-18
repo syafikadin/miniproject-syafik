@@ -5,7 +5,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    indexNumber: []
+    indexNumber: [],
+    indexCust: []
   },
   getters: {
   },
@@ -13,11 +14,17 @@ export default new Vuex.Store({
     setIndexNumber(state, payload){
       state.indexNumber = payload
     },
+    setIndexCust(state,payload){
+      state.indexCust = payload
+    }
   },
   actions: {
     changeIndexNumber(store, payload){
       store.commit("setIndexNumber", payload)
     },
+    changeIndexCust(store, payload){
+      store.commit("setIndexCust", payload)
+    }
   },
   modules: {
   }

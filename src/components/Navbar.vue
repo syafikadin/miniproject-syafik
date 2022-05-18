@@ -27,18 +27,21 @@
 
       <v-btn
         text
+        to="/admin/"
       >
         <span class="mr-2">Dashboard</span>
       </v-btn>
 
       <v-btn
         text
+        to="/admin/listCars"
       >
         <span class="mr-2">Daftar Mobil</span>
       </v-btn>
 
       <v-btn
         text
+        to="/admin/inTransaction"
       >
         <span class="mr-2">Transaksi Masuk</span>
       </v-btn>

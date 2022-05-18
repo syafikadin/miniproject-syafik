@@ -1,7 +1,8 @@
 <template>
   <v-container>
+    <Navbar />
     <v-row>
-      <h1 class="mx-auto">Daftar Mobil</h1>
+      <h1 class="mx-auto mt-5">Daftar Mobil</h1>
     </v-row>
 
     <v-row>
@@ -18,7 +19,7 @@
 
     <v-row>
       <v-col>
-        <v-simple-table dark class="mt-6" v-if="!isEditMode">
+        <v-simple-table class="mt-6" v-if="!isEditMode">
           <template v-slot:default>
             <thead>
               <tr>
@@ -169,9 +170,14 @@
 </template>
 
 <script>
+
+import Navbar from '../../components/Navbar.vue'
 import gql from 'graphql-tag'
 
 export default {
+  components: {
+    Navbar
+  },
   data() {
     return {
       idMobil: '',

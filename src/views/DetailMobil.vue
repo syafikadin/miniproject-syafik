@@ -1,8 +1,10 @@
 <template>
+<v-container>
     <v-row>
         <v-col>
             <h1 class="text-center mt-4">Detail Mobil</h1>
             <v-btn
+            color="secondary"
             to="/"
             class="mt-4"
             >
@@ -11,8 +13,9 @@
             <v-simple-table class="mt-5">
                 <template v-slot:default>
                 <tbody>
+                    <tr v-if="$apollo.loading">Loading ...</tr>
                     <tr>
-                        <td class="text-center" colspan="2"><img :src="mobil[indexNumber].gambar" alt="Mobil" width="600"></td>
+                        <td class="text-center" colspan="2"><img :src="mobil[indexNumber].gambar" alt="Mobil"></td>
                     </tr>
                     <tr>
                         <td>ID Mobil</td>
@@ -46,12 +49,13 @@
                 </template>
             </v-simple-table>
             <v-btn class="mt-6"
-            to="/formTransaksiCust"
+            color="primary"
+            :to="'/formTransaksi/' + indexNumber"
             >Beli Sekarang
             </v-btn>
         </v-col>
     </v-row>
-
+</v-container>
 </template>
 
 <script>
@@ -63,6 +67,9 @@ export default {
     computed: {
         indexNumber() {
             return this.$route.params.id
+        },
+        indexNumber2() {
+            return this.$store.state.indexNumber
         }
     },
 
